@@ -1,0 +1,61 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 2rem;
+    background-color: #f4f4f4;
+}
+
+/* 1. 滑桿的基礎容器 */
+.custom-slider {
+    position: relative; /* 關鍵：讓子元素可以用 absolute 定位 */
+    width: 100%;
+    max-width: 500px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: #e0e0e0; /* 軌道底色 */
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+/* 2. 軌道 (雖然在視覺上被底色取代，但可用來緩衝點擊) */
+.slider-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* 3. 已完成的進度條 (例如 YT 的紅色部分) */
+.slider-progress {
+    position: absolute;
+    height: 100%;
+    border-radius: 6px;
+    background-color: #f00; /* YT 風格的紅色 */
+    width: 0%; /* JS 會控制這個寬度 */
+    pointer-events: none; /* 讓點擊穿透到軌道 */
+}
+
+/* 4. 可拖曳的控制點 */
+.slider-thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    top: 50%;
+    
+    /* 關鍵：
+       'left' 由 JS 控制 (0% ~ 100%)
+       'transform' 讓圓心對準 left 的位置
+    */
+    left: 0%; 
+    transform: translate(-50%, -50%); 
+    pointer-events: none; /* 同上 */
+}
+
+/* 當使用者按下滑桿時，給予視覺反饋 */
+.custom-slider:active .slider-thumb {
+    box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.5);
+}
