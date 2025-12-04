@@ -14,4 +14,5 @@
 def cal(end):
         return end+ cal(end-1) if end !=1 else 1
 
+
 print(cal(999))
