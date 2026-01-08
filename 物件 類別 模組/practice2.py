@@ -37,7 +37,38 @@ class Student():
         elif diff < 0: 
             print('可...可惡，難道，這就是' + b.name + '真正的實力嗎？')
 
+    # 定義
+    
+    def newScore(self, b):
+        selfScore = self.score.get('數學',0)*2 + self.score.get('英文',0)*5
+        score_b = b.score.get('數學',0)*2 + b.score.get('英文',0)*5
+        return selfScore, score_b
+
+    def __gt__(self, b):
+        selfScore, score_b = self.newScore(b)
+        return selfScore > score_b
+    
+    def __eq__(self, b):
+        selfScore, score_b = self.newScore(b)
+        return selfScore == score_b
+
+    # 計算加權
+    def compareE(self, b):
+        # 要先讓程式知道個別科目的value
+        if self.__gt__(self, b):
+            print(self.name + ' > ' + b.name)
+        elif self.__eq__(self, b):
+            print(self.name + ' == ' + b.name)
+        else:
+            print(self.name + ' < ' + b.name)    
+
+        
 # 呼叫時同時給予成績(注意要對應科目，程式才會知道)，成績若複數個，可以用list
 ming = Student( '小明',{'數學':55,  '英文':70, '物理':55}) #小明是學生
 mei = Student('小美', {'數學':90,  '英文':88, '物理':100})
 howhow = Student('HowHow', {'數學':80,'英文':60,'物理':40})
+
+# 比較成績
+ming.compare(howhow)  # What! 竟然平手?
+ming.compare(mei)     # 可...可惡，難道，這就是小美真正的實力嗎？
+mei.compare(howhow)   # 小明贏了!
