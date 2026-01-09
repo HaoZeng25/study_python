@@ -7,4 +7,4 @@ class Desolve():
         print('https://bit.ly/leetcodeall')
 
 
-Desolve.ads()  # 直接用類別名稱呼叫靜態方法，無須建立物件
+Desolve.ads()  # 直接用類別名稱呼叫靜態方法，無須建立/產生物件
