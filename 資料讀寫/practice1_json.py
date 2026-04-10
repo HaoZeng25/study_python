@@ -4,7 +4,7 @@
 # 這中間可能會遇到讀取的問題，是JSON檔文字編碼的錯誤，
 # 請在打開檔案時額外給入 encoding="utf-8" 的參數。
 # bs是一個什麼？(字串？串列？字典？)
-    # list 清單
+    # 答: list 清單
 # 請利用前面所學，將所有位在'臺北市'的書店資訊存成一個串列，名為taipei。
 # taipei中特色書店點閱數超過2000的店家是哪幾家呢？請列出其名字。
 
@@ -38,7 +38,7 @@ with open('govbook.json', 'r', encoding = 'utf-8')as f:
             taipei.append(bookshop)            
         
     print(type(taipei))
-    print(taipei)
+    # print(taipei)
     print(len(taipei))  
     
     # [Bonus]為了方便閱讀，我想產生一個新的json檔案，將taipei放進去
@@ -48,4 +48,23 @@ with open('govbook.json', 'r', encoding = 'utf-8')as f:
     # 將taipei寫入
     with open('taipei_bookstore.json', 'w', encoding='utf-8') as f:
         json.dump(taipei, f, ensure_ascii=False, indent=4)
+    # with open('taipei_bookstore.json', 'w', encoding= 'utf-8') as f:
+    #     json.dump(taipei, f, ensure_ascii=False,)
 
+    # 篩選出 點閱數>2000 的店家，存成python資料，列出名字
+        # 點閱數 -> 'hitrate'
+        # 'hitrate' > 2000
+        # 用loop遍歷整個taipei list，找到 'hitrate' > 2000，存進一個新的陣列 highrate
+        # 遍歷一次highrate，列出所有"name"的value
+    highrate = []
+    for bookshop in taipei:
+        if bookshop['hitRate'] > 2000:
+            highrate.append(bookshop)
+               
+    print(type(highrate))
+    print(len(highrate))
+
+    for bkshop in highrate:
+        print(bkshop['name'])
+
+        # 我發現"女書店"有兩間，只有一間有 > 2000，但沒有"需求"說要解決此問題，所以不投入成本去解決這個問題了
